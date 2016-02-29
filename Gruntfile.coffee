@@ -83,12 +83,12 @@ module.exports = (grunt)->
           #
           'dist/abn_tree_directive.js':'temp/_directive.coffee'
           'test/test_page.js':'test/test_page.coffee'
-
-
-
+      uglify:
+        my_target:
+          files:
+            'dist/abn_tree_directive.min.js': ['dist/abn_tree_directive.js']
 
     watch:
-
       jade:
         files:['**/*.jade']
         tasks:['jade','string-replace']
@@ -111,9 +111,6 @@ module.exports = (grunt)->
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-contrib-watch'
   grunt.loadNpmTasks 'grunt-string-replace'
-
+  grunt.loadNpmTasks 'grunt-contrib-uglify'
 
   grunt.registerTask 'default', ['jade','string-replace','coffee','watch']
-
-
-

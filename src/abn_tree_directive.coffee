@@ -14,13 +14,9 @@ module.directive 'abnTree',['$timeout',($timeout)->
     treeControl:'='
 
   link:(scope,element,attrs)->
-
-
     error = (s) ->
-      console.log 'ERROR:'+s
       debugger
       return undefined
-
 
     # default values ( Font-Awesome 3 or 4 or Glyphicons )
     attrs.iconExpand   ?= 'icon-plus  glyphicon glyphicon-plus  fa fa-plus'    
@@ -33,17 +29,13 @@ module.directive 'abnTree',['$timeout',($timeout)->
 
     # check args
     if !scope.treeData
-      alert 'no treeData defined for the tree!'
       return
 
     if !scope.treeData.length?
       if treeData.label?
         scope.treeData = [ treeData ]
       else
-        alert 'treeData should be an array of root branches'
         return
-
-
     #
     # internal utilities...
     # 
@@ -56,10 +48,6 @@ module.directive 'abnTree',['$timeout',($timeout)->
       for root_branch in scope.treeData
         do_f(root_branch,1)
 
-
-
-
-    
     #
     # only one branch can be selected at a time
     # 
@@ -80,7 +68,6 @@ module.directive 'abnTree',['$timeout',($timeout)->
         selected_branch = branch
         expand_all_parents(branch)
 
-
         #
         # check:
         # 1) branch.onSelect
@@ -99,7 +86,6 @@ module.directive 'abnTree',['$timeout',($timeout)->
           if scope.onSelect?
             $timeout ->
               scope.onSelect({branch:branch})
-
 
     scope.user_clicks_branch = (branch)->
       if branch isnt selected_branch
@@ -125,7 +111,6 @@ module.directive 'abnTree',['$timeout',($timeout)->
       for_all_ancestors child, (b)->
         b.expanded = true
 
-
     #
     # To make the Angular rendering simpler,
     #  ( and to avoid recursive templates )
@@ -142,8 +127,6 @@ module.directive 'abnTree',['$timeout',($timeout)->
     scope.tree_rows = []
     on_treeData_change = ->
 
-      #console.log 'tree-data-change!'
-      
       #
       # if "children" is just a list of strings...
       # ...change them into objects:
@@ -168,7 +151,6 @@ module.directive 'abnTree',['$timeout',($timeout)->
       for_each_branch (b,level)->
         if not b.uid
           b.uid = ""+Math.random()
-      console.log 'UIDs are set.'
 
 
       # set all parents:
@@ -177,9 +159,7 @@ module.directive 'abnTree',['$timeout',($timeout)->
           for child in b.children
             child.parent_uid = b.uid
 
-
       scope.tree_rows = []
-
       
       #
       # add_branch_to_list: recursively add one branch
@@ -261,7 +241,6 @@ module.directive 'abnTree',['$timeout',($timeout)->
     # expand to the proper level
     #
     n = scope.treeData.length
-    console.log 'num root branches = '+n
     for_each_branch (b,level)->
       b.level = level
       b.expanded = b.level < expand_level
