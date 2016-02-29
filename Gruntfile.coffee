@@ -84,9 +84,9 @@ module.exports = (grunt)->
           'dist/abn_tree_directive.js':'temp/_directive.coffee'
           'test/test_page.js':'test/test_page.coffee'
       uglify:
-        my_target:
-          files:
-            'dist/abn_tree_directive.min.js': ['dist/abn_tree_directive.js']
+        build:
+          src: 'dist/abn_tree_directive.js'
+          dest: 'dist/abn_tree_directive.min.js'
 
     watch:
       jade:
